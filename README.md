@@ -1,8 +1,11 @@
 # kaleidoscope
 
-My First Language Frontend with LLVM Tutorial
+````
+# Compile
+clang++ -g -O3 toy.cc `llvm-config --cxxflags`
+# Run
+./a.out
+````
 
-## 参考
 
-https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/index.html
 
