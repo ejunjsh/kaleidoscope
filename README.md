@@ -14,7 +14,8 @@ https://llvm.org/docs/CMake.html#embedding-llvm-in-your-project
 $ mkdir build
 $ cd build
 $ cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_DIR={path to llvm} ..   
-# {path to llvm} 是llvm的安装路径下LLVMConfig.cmake所在的目录，一般如果cmake能找到，可以不加-DLLVM_DIR 这个选项
+# {path to llvm} 是llvm的安装路径下LLVMConfig.cmake所在的目录，
+# 一般你llvm是安装到标准的目录，cmake在查找包能找到话，可以不加-DLLVM_DIR 这个选项
 $ make
 ````
 这时候就会生成一个可执行文件kaleidocscope,运行它
