@@ -13,7 +13,7 @@ https://llvm.org/docs/CMake.html#embedding-llvm-in-your-project
 ````
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_DIR={path to llvm} ..   
+$ cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_DIR={path to llvm config cmake} ..   
 # {path to llvm} 是llvm的安装路径下LLVMConfig.cmake所在的目录，
 # 一般你llvm是安装到标准的目录，cmake在查找包能找到话，可以不加-DLLVM_DIR 这个选项
 $ make

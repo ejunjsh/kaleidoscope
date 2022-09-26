@@ -18,7 +18,7 @@ enum Token {
   tok_extern = -3,
 
   // primary
-  // 表达式由变量和字面量（数字）组成
+  // 表达式由变量（标识符）和字面量（数字）组成
   tok_identifier = -4,
   tok_number = -5,
 

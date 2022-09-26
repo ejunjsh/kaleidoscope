@@ -11,8 +11,8 @@
 #include <vector>
 #include "lexer.h"
 
-std::string IdentifierStr; // Filled in if tok_identifier
-double NumVal;             // Filled in if tok_number
+std::string IdentifierStr; // Filled in if tok_identifier 由处理tok_identifier时填充
+double NumVal;             // Filled in if tok_number 由处理tok_number时填充
 
 
 
@@ -20,10 +20,11 @@ int gettok(){
   static int LastChar = ' ';
 
   // Skip any whitespace.
+  // 跳过空白字符
   while (isspace(LastChar))
     LastChar = getchar();
 
-  if (isalpha(LastChar)) { // identifier: [a-zA-Z][a-zA-Z0-9]*
+  if (isalpha(LastChar)) { // identifier: [a-zA-Z][a-zA-Z0-9]* 处理标识符
     IdentifierStr = LastChar;
     while (isalnum((LastChar = getchar())))
       IdentifierStr += LastChar;
@@ -51,7 +52,7 @@ int gettok(){
     return tok_identifier;
   }
 
-  if (isdigit(LastChar) || LastChar == '.') { // Number: [0-9.]+
+  if (isdigit(LastChar) || LastChar == '.') { // Number: [0-9.]+ 处理数字
     std::string NumStr;
     do {
       NumStr += LastChar;
@@ -64,6 +65,7 @@ int gettok(){
 
   if (LastChar == '#') {
     // Comment until end of line.
+    // 跳过注释和换行
     do
       LastChar = getchar();
     while (LastChar != EOF && LastChar != '\n' && LastChar != '\r');
@@ -73,10 +75,12 @@ int gettok(){
   }
 
   // Check for end of file.  Don't eat the EOF.
+  // 检查是否文件结尾，不要吞掉EOF
   if (LastChar == EOF)
     return tok_eof;
 
   // Otherwise, just return the character as its ascii value.
+  // 否则返回字符的ascii的值
   int ThisChar = LastChar;
   LastChar = getchar();
   return ThisChar;
