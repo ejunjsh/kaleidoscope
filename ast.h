@@ -2,12 +2,14 @@
 #define AST_H
 //===----------------------------------------------------------------------===//
 // Abstract Syntax Tree (aka Parse Tree)
+// 抽象语法树
 //===----------------------------------------------------------------------===//
 using namespace llvm;
 
 
 
 /// ExprAST - Base class for all expression nodes.
+/// 所有表达式节点的基类
 class ExprAST {
 public:
   virtual ~ExprAST() = default;
@@ -16,6 +18,7 @@ public:
 };
 
 /// NumberExprAST - Expression class for numeric literals like "1.0".
+/// 数字字面量的表达式节点
 class NumberExprAST : public ExprAST {
   double Val;
 
@@ -26,6 +29,7 @@ public:
 };
 
 /// VariableExprAST - Expression class for referencing a variable, like "a".
+/// 变量表达式节点，用来引用一个变量
 class VariableExprAST : public ExprAST {
   std::string Name;
 
@@ -37,6 +41,7 @@ public:
 };
 
 /// UnaryExprAST - Expression class for a unary operator.
+/// 一元表达式节点
 class UnaryExprAST : public ExprAST {
   char Opcode;
   std::unique_ptr<ExprAST> Operand;
@@ -49,6 +54,7 @@ public:
 };
 
 /// BinaryExprAST - Expression class for a binary operator.
+/// 二元表达式节点
 class BinaryExprAST : public ExprAST {
   char Op;
   std::unique_ptr<ExprAST> LHS, RHS;
@@ -62,6 +68,7 @@ public:
 };
 
 /// CallExprAST - Expression class for function calls.
+/// 函数调用表达式节点
 class CallExprAST : public ExprAST {
   std::string Callee;
   std::vector<std::unique_ptr<ExprAST>> Args;
@@ -75,6 +82,7 @@ public:
 };
 
 /// IfExprAST - Expression class for if/then/else.
+/// if/then/else条件判断表达式节点
 class IfExprAST : public ExprAST {
   std::unique_ptr<ExprAST> Cond, Then, Else;
 
@@ -87,6 +95,7 @@ public:
 };
 
 /// ForExprAST - Expression class for for/in.
+/// for/in 循环表达式节点
 class ForExprAST : public ExprAST {
   std::string VarName;
   std::unique_ptr<ExprAST> Start, End, Step, Body;
@@ -102,6 +111,7 @@ public:
 };
 
 /// VarExprAST - Expression class for var/in
+/// 变量定义表达式节点
 class VarExprAST : public ExprAST {
   std::vector<std::pair<std::string, std::unique_ptr<ExprAST>>> VarNames;
   std::unique_ptr<ExprAST> Body;
@@ -118,11 +128,12 @@ public:
 /// PrototypeAST - This class represents the "prototype" for a function,
 /// which captures its name, and its argument names (thus implicitly the number
 /// of arguments the function takes), as well as if it is an operator.
+/// 函数原型表达式节点，此类表示函数的“原型”，它捕获其名称和参数名称（因此隐式地表示函数接受的参数数量），以及是否为运算符。
 class PrototypeAST {
   std::string Name;
   std::vector<std::string> Args;
   bool IsOperator;
-  unsigned Precedence; // Precedence if a binary op.
+  unsigned Precedence; // Precedence if a binary op. 二元操作符的优先级
 
 public:
   PrototypeAST(const std::string &Name, std::vector<std::string> Args,
@@ -145,6 +156,7 @@ public:
 };
 
 /// FunctionAST - This class represents a function definition itself.
+/// 函数定义表达式节点，代表一个函数的定义
 class FunctionAST {
   std::unique_ptr<PrototypeAST> Proto;
   std::unique_ptr<ExprAST> Body;
