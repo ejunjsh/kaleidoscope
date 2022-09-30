@@ -6,7 +6,7 @@ My First Language Frontend with LLVM Tutorial
 
 根据下面链接安装llvm
 
-https://llvm.org/docs/CMake.html#embedding-llvm-in-your-project
+https://llvm.org/docs/CMake.html#quick-start 
 
 ## 编译
 
