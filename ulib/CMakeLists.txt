@@ -1,4 +1,4 @@
 project (ulib)
 
-add_library(${PROJECT_NAME} lib.cc)
+add_library(${PROJECT_NAME} ulib.cc)
 
